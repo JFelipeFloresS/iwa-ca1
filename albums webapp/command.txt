@@ -1,0 +1,1 @@
+xslt3 -xsl:public/albums.xsl -s:private/albums.xml -o:public/index.html -t

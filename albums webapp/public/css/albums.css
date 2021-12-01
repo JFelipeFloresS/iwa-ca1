@@ -1,0 +1,36 @@
+/**
+red: #d32531
+grey: #e0e1e6
+*/
+
+body {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    height: 100%;
+}
+
+.navbar {
+    margin: 0 auto 2% auto;
+    background-color: snow;
+    width: 100%;
+    height: 5%;
+    border-bottom: 1px solid #e0e1e6;
+}
+
+.navbar .logo {
+    font-size: larger;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto 0 auto;
+    max-height: 30em;
+    overflow-y: auto;
+}
+
+table, th, td {
+    border: 1px solid #e0e1e6;
+    margin: 0;
+    padding: 1em;
+    border-collapse: collapse;
+}
