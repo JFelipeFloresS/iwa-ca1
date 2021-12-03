@@ -12,7 +12,10 @@
             </thead>
             <tbody>
                 <xsl:for-each select='//Album'>
-                    <tr>
+                    <tr class='album-row'>
+                        <xsl:attribute name='year'>
+                            <xsl:value-of select='Year'/>
+                        </xsl:attribute>
                         <td>
                             <xsl:value-of select='Number' />
                         </td>
