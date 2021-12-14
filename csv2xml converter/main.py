@@ -12,15 +12,15 @@ with open('albums.csv', newline='') as csv_file:
         et.SubElement(album, 'Number').text = row['Number'].strip()
         et.SubElement(album, 'Year').text = row['Year'].strip()
         et.SubElement(album, 'Title').text = row['Album'].strip()
-        et.SubElement(album, 'Artist').text = row['Artist'].strip()
+        et.SubElement(album, 'Artist').text = row['Artist'].strip().replace('�', '')
 
         genres = et.SubElement(album, 'Genres')
         for genre in row['Genre'].split(','):
-            et.SubElement(genres, 'Genre').text = genre.strip()
+            et.SubElement(genres, 'Genre').text = genre.strip().replace('�', '')
 
         subgenres = et.SubElement(album, 'Subgenres')
         for sub in row['Subgenre'].split(','):
-            et.SubElement(subgenres, 'Subgenre').text = sub.strip()
+            et.SubElement(subgenres, 'Subgenre').text = sub.strip().replace('�', '')
 
     tree = et.ElementTree(root)
     xml_pretty = minidom.parseString(et.tostring(root)).toprettyxml(indent='    ')

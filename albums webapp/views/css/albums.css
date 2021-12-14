@@ -43,3 +43,7 @@ td {
     padding: 1em;
     border-collapse: collapse;
 }
+
+table .album-row {
+    cursor: grab;
+}

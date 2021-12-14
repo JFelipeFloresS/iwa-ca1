@@ -1639,18 +1639,18 @@
         <Artist>Various Artists</Artist>
         <Genres>
             <Genre>Reggae</Genre>
-            <Genre>�Pop</Genre>
-            <Genre>�Folk</Genre>
+            <Genre>Pop</Genre>
+            <Genre>Folk</Genre>
             <Genre>World</Genre>
-            <Genre>&amp; Country</Genre>
-            <Genre>�Stage &amp; Screen</Genre>
+            <Genre>Country</Genre>
+            <Genre>Stage &amp; Screen</Genre>
         </Genres>
         <Subgenres>
             <Subgenre>Reggae</Subgenre>
-            <Subgenre>�Roots Reggae</Subgenre>
-            <Subgenre>�Rocksteady</Subgenre>
-            <Subgenre>�Contemporary</Subgenre>
-            <Subgenre>�Soundtrack</Subgenre>
+            <Subgenre>Roots Reggae</Subgenre>
+            <Subgenre>Rocksteady</Subgenre>
+            <Subgenre>Contemporary</Subgenre>
+            <Subgenre>Soundtrack</Subgenre>
         </Subgenres>
     </Album>
     <Album>
@@ -1778,11 +1778,11 @@
         <Artist>Various Artists</Artist>
         <Genres>
             <Genre>Electronic</Genre>
-            <Genre>�Stage &amp; Screen</Genre>
+            <Genre>Stage &amp; Screen</Genre>
         </Genres>
         <Subgenres>
             <Subgenre>Soundtrack</Subgenre>
-            <Subgenre>�Disco</Subgenre>
+            <Subgenre>Disco</Subgenre>
         </Subgenres>
     </Album>
     <Album>
@@ -2623,12 +2623,12 @@
         <Artist>John Mayall &amp; The Bluesbreakers</Artist>
         <Genres>
             <Genre>Rock</Genre>
-            <Genre>�Blues</Genre>
+            <Genre>Blues</Genre>
         </Genres>
         <Subgenres>
             <Subgenre>Blues Rock</Subgenre>
-            <Subgenre>�Electric Blues</Subgenre>
-            <Subgenre>�Harmonica Blues</Subgenre>
+            <Subgenre>Electric Blues</Subgenre>
+            <Subgenre>Harmonica Blues</Subgenre>
         </Subgenres>
     </Album>
     <Album>
@@ -2641,7 +2641,7 @@
         </Genres>
         <Subgenres>
             <Subgenre>Garage Rock</Subgenre>
-            <Subgenre>�Psychedelic Rock</Subgenre>
+            <Subgenre>Psychedelic Rock</Subgenre>
         </Subgenres>
     </Album>
     <Album>
@@ -4836,14 +4836,14 @@
     <Album>
         <Number>359</Number>
         <Year>1972</Year>
-        <Title>Honky Ch�teau</Title>
+        <Title>Honky Chateau</Title>
         <Artist>Elton John</Artist>
         <Genres>
             <Genre>Rock</Genre>
         </Genres>
         <Subgenres>
             <Subgenre>Pop Rock</Subgenre>
-            <Subgenre>�Classic Rock</Subgenre>
+            <Subgenre>Classic Rock</Subgenre>
         </Subgenres>
     </Album>
     <Album>
@@ -5233,7 +5233,7 @@
         <Artist>Various Artists</Artist>
         <Genres>
             <Genre>Funk / Soul</Genre>
-            <Genre>�Folk</Genre>
+            <Genre>Folk</Genre>
             <Genre>World</Genre>
             <Genre>&amp; Country</Genre>
         </Genres>
@@ -5675,7 +5675,7 @@
         <Artist>Various Artists</Artist>
         <Genres>
             <Genre>Rock</Genre>
-            <Genre>�Pop</Genre>
+            <Genre>Pop</Genre>
         </Genres>
         <Subgenres>
             <Subgenre>Pop Rock</Subgenre>
@@ -6024,13 +6024,13 @@
         <Number>447</Number>
         <Year>1964</Year>
         <Title>Getz / Gilberto</Title>
-        <Artist>Stan Getz�/�Joao Gilberto�featuring�Antonio Carlos Jobim</Artist>
+        <Artist>Stan Getz/Joao Gilberto featuring Antonio Carlos Jobim</Artist>
         <Genres>
             <Genre>Jazz</Genre>
         </Genres>
         <Subgenres>
             <Subgenre>Bossa Nova</Subgenre>
-            <Subgenre>�Latin Jazz</Subgenre>
+            <Subgenre>Latin Jazz</Subgenre>
         </Subgenres>
     </Album>
     <Album>
@@ -6057,7 +6057,7 @@
         </Genres>
         <Subgenres>
             <Subgenre>Lo-Fi</Subgenre>
-            <Subgenre>�Indie Rock</Subgenre>
+            <Subgenre>Indie Rock</Subgenre>
         </Subgenres>
     </Album>
     <Album>

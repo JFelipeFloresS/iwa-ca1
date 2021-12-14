@@ -11,9 +11,25 @@ const router = express(), //Instantiating Express
 
 router.use(express.static(path.resolve(__dirname, "views"))); //Serving static content from "public" folder
 
+function XMLtoJSON(filename, cb) {
+    let filepath = path.normalize(path.join(__dirname, filename));
+    fs.readFile(filepath, "utf8", function(err, xmlStr) {
+        if (err) throw err;
+        xml2js.parseString(xmlStr, {}, cb);
+    });
+}
+
+function JSONtoXML(filename, obj, cb) {
+    let filepath = path.normalize(path.join(__dirname, filename));
+    let builder = new xml2js.Builder();
+    let xml = builder.buildObject(obj);
+    fs.unlinkSync(filepath);
+    fs.writeFile(filepath, xml, cb);
+}
+
 router.get("/get/table", function(req, res) {
     res.writeHead(200, {
-        "Content-Type": "text/html"
+        "Content-Type": "text/html",
     }); //Tell the user that the resource exists and which type that is
 
     let xml = fs.readFileSync("albums.xml", "utf8"), //read in the XML file
@@ -25,6 +41,34 @@ router.get("/get/table", function(req, res) {
     let result = xsltProcess(doc, stylesheet); //Performing XSLT
 
     res.end(result.toString()); //Serve back the user
+});
+
+router.post("/post/json", function(req, res) {
+    function appendJSON(obj) {
+        console.log(obj);
+
+        XMLtoJSON("albums.xml", function(err, result) {
+            if (err) console.log(err);
+            result.Collection.Album.entry.push({
+                Number: obj.Number,
+                Year: obj.Year,
+                Title: obj.Title,
+                Artist: obj.Artist,
+                Genres: obj.Genres,
+                Subgenres: obj.Subgenres,
+            });
+
+            console.log(JSON.stringify(result, null, " "));
+
+            JSONtoXML("albums.xml", result, function(err) {
+                if (err) console.log(err);
+            });
+        });
+    }
+
+    appendJSON(req.body);
+
+    res.redirect("back");
 });
 
 server.listen(
