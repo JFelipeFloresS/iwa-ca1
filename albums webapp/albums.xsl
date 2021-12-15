@@ -12,11 +12,11 @@
             </thead>
             <tbody id='tableBody'>
                 <xsl:for-each select='//Album'>
-                    <tr class='albumRow' id='albumRow' draggable='true'>
+                    <tr class='album-row' id='album-row' draggable='true'>
                         <xsl:attribute name='year'>
                             <xsl:value-of select='Year'/>
                         </xsl:attribute>
-                        <td class='number'>
+                        <td class='number' id='number'>
                             <xsl:value-of select='Number' />
                         </td>
                         <td class='title'>
@@ -29,17 +29,15 @@
                             <xsl:value-of select='Artist' />
                         </td>
                         <td class='genres'>
-                            |
                             <xsl:for-each select='Genres/Genre'>
                                 <xsl:value-of select='.' />
-                                |
+                                <br />
                             </xsl:for-each>
                         </td>
                         <td class='subgenres'>
-                            |
                             <xsl:for-each select='Subgenres/Subgenre'>
                                 <xsl:value-of select='.' />
-                                |
+                                <br />
                             </xsl:for-each>
                         </td>
                         <td><button class='btn btn-primary'>delete</button></td>
@@ -47,5 +45,6 @@
                 </xsl:for-each>
             </tbody>
         </table>
+        <script src="./js/xsl.js"></script>
     </xsl:template>
 </xsl:stylesheet>

@@ -47,3 +47,12 @@ td {
 table .album-row {
     cursor: grab;
 }
+
+tbody tr:hover {
+    background-color: #d5d5d5;
+}
+
+.over {
+    opacity: 80%;
+    background-color: #d5d5d5;
+}
