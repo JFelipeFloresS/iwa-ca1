@@ -13,8 +13,8 @@ router.use(express.static(path.resolve(__dirname, "views"))); //Serving static c
 
 function XMLtoJSON(filename, cb) {
     let filepath = path.normalize(path.join(__dirname, filename));
-    fs.readFile(filepath, "utf8", function(err, xmlStr) {
-        if (err) throw err;
+    fs.readFile(filepath, "utf8", function (err, xmlStr) {
+        if (err) throw (err);
         xml2js.parseString(xmlStr, {}, cb);
     });
 }
@@ -27,7 +27,7 @@ function JSONtoXML(filename, obj, cb) {
     fs.writeFile(filepath, xml, cb);
 }
 
-router.get("/get/table", function(req, res) {
+router.get("/get/table", function (req, res) {
     res.writeHead(200, {
         "Content-Type": "text/html",
     }); //Tell the user that the resource exists and which type that is
@@ -43,11 +43,11 @@ router.get("/get/table", function(req, res) {
     res.end(result.toString()); //Serve back the user
 });
 
-router.post("/post/json", function(req, res) {
+router.post("/post/json", function (req, res) {
     function appendJSON(obj) {
         console.log(obj);
 
-        XMLtoJSON("albums.xml", function(err, result) {
+        XMLtoJSON("albums.xml", function (err, result) {
             if (err) console.log(err);
             result.Collection.Album.entry.push({
                 Number: obj.Number,
@@ -60,7 +60,7 @@ router.post("/post/json", function(req, res) {
 
             console.log(JSON.stringify(result, null, " "));
 
-            JSONtoXML("albums.xml", result, function(err) {
+            JSONtoXML("albums.xml", result, function (err) {
                 if (err) console.log(err);
             });
         });
@@ -71,10 +71,25 @@ router.post("/post/json", function(req, res) {
     res.redirect("back");
 });
 
+router.post("/post/update", function (req, res) {
+    console.log(req);
+    function updateJSON(json) {
+        JSONtoXML("albums.xml", json, function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    updateJSON(req);
+
+    res.redirect("back");
+});
+
 server.listen(
     process.env.PORT || 3000,
     process.env.IP || "0.0.0.0",
-    function() {
+    function () {
         const addr = server.address();
         console.log("Server listening at", addr.address + ":" + addr.port);
     }

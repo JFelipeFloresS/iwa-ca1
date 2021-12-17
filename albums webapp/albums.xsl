@@ -13,9 +13,6 @@
             <tbody id='tableBody'>
                 <xsl:for-each select='//Album'>
                     <tr class='album-row' id='album-row' draggable='true'>
-                        <xsl:attribute name='year'>
-                            <xsl:value-of select='Year'/>
-                        </xsl:attribute>
                         <td class='number' id='number'>
                             <xsl:value-of select='Number' />
                         </td>
@@ -37,10 +34,10 @@
                         <td class='subgenres'>
                             <xsl:for-each select='Subgenres/Subgenre'>
                                 <xsl:value-of select='.' />
-                                <br />
+                                <br>
                             </xsl:for-each>
                         </td>
-                        <td><button class='btn btn-primary'>delete</button></td>
+                        <td><button class='btn btn-danger' id='delete-button'>delete</button></td>
                     </tr>
                 </xsl:for-each>
             </tbody>

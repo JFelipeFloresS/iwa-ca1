@@ -56,3 +56,8 @@ tbody tr:hover {
     opacity: 80%;
     background-color: #d5d5d5;
 }
+
+.dragged {
+    background-color: #f0f0f0;
+    border: 1px solid black;
+}
