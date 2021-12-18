@@ -1,4 +1,5 @@
 const express = require("express"), //Allows to respond to HTTP requests, defines routing and renders the required content
+    bodyParser = require('body-parser'), // Parses the body of requests
     fs = require("fs"), //Working with the file system (read and write files)
     http = require("http"), //HTTP Server
     path = require("path"), //Utility that allows us to work with directory paths
@@ -10,6 +11,9 @@ const router = express(), //Instantiating Express
     server = http.createServer(router); //Instantiating the server
 
 router.use(express.static(path.resolve(__dirname, "views"))); //Serving static content from "public" folder
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 function XMLtoJSON(filename, cb) {
     let filepath = path.normalize(path.join(__dirname, filename));
@@ -43,45 +47,17 @@ router.get("/get/table", function (req, res) {
     res.end(result.toString()); //Serve back the user
 });
 
-router.post("/post/json", function (req, res) {
-    function appendJSON(obj) {
-        console.log(obj);
-
-        XMLtoJSON("albums.xml", function (err, result) {
-            if (err) console.log(err);
-            result.Collection.Album.entry.push({
-                Number: obj.Number,
-                Year: obj.Year,
-                Title: obj.Title,
-                Artist: obj.Artist,
-                Genres: obj.Genres,
-                Subgenres: obj.Subgenres,
-            });
-
-            console.log(JSON.stringify(result, null, " "));
-
-            JSONtoXML("albums.xml", result, function (err) {
-                if (err) console.log(err);
-            });
-        });
-    }
-
-    appendJSON(req.body);
-
-    res.redirect("back");
-});
-
 router.post("/post/update", function (req, res) {
-    console.log(req);
+
     function updateJSON(json) {
-        JSONtoXML("albums.xml", json, function (err) {
+        JSONtoXML("./albums.xml", json, function (err) {
             if (err) {
                 console.log(err);
             }
         });
     }
 
-    updateJSON(req);
+    updateJSON(req.body);
 
     res.redirect("back");
 });

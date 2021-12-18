@@ -7,8 +7,10 @@
                 <th>Title</th>
                 <th>Year</th>
                 <th>Artist</th>
+                <!--
                 <th>Genre</th>
                 <th>Subgenre</th>
+                -->
             </thead>
             <tbody id='tableBody'>
                 <xsl:for-each select='//Album'>
@@ -25,6 +27,7 @@
                         <td class='artist'>
                             <xsl:value-of select='Artist' />
                         </td>
+                        <!--
                         <td class='genres'>
                             <xsl:for-each select='Genres/Genre'>
                                 <xsl:value-of select='.' />
@@ -37,6 +40,7 @@
                                 <br>
                             </xsl:for-each>
                         </td>
+                        -->
                         <td><button class='btn btn-danger' id='delete-button'>delete</button></td>
                     </tr>
                 </xsl:for-each>

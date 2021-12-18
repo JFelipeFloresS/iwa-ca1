@@ -1,11 +1,14 @@
+/**
+ * Drawing table!!
+ */
 function draw_table() {
     $('#results').empty();
-    $.getHTMLuncached = function(url) {
+    $.getHTMLuncached = function (url) {
         return $.ajax({
             url: url,
             type: 'GET',
             cache: false,
-            success: function(html) {
+            success: function (html) {
                 $('#results').append(html);
             }
         });
@@ -13,6 +16,7 @@ function draw_table() {
     $.getHTMLuncached('get/table');
 }
 
-$(document).ready(function(){
+
+$(document).ready(function () {
     draw_table();
 });
