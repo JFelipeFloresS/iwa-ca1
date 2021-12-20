@@ -61,13 +61,13 @@ allAlbums = document.querySelectorAll('.album-row');
 allAlbums.forEach(function (album) {
 
     albumTitle = album.querySelector('.title').innerHTML;
-    albumTitle = albumTitle.replace('&amp;', '&');
-    albumTitle = albumTitle.replace('&quot;', '"');
+    albumTitle = albumTitle.replaceAll('&amp;', '&');
+    albumTitle = albumTitle.replaceAll('&quot;', '"');
     album.querySelector('.title').innerHTML = albumTitle;
 
     albumArtist = album.querySelector('.artist').innerHTML;
-    albumArtist = albumArtist.replace('&amp;', '&');
-    albumArtist = albumArtist.replace('&quot;', '"');
+    albumArtist = albumArtist.replaceAll('&amp;', '&');
+    albumArtist = albumArtist.replaceAll('&quot;', '"');
     album.querySelector('.artist').innerHTML = albumArtist;
 
 });
@@ -129,10 +129,14 @@ function handleDrop(e) {
 
 function dropElementTop(minPos, maxPos, dropElementInnerHTML) {
     // The iteration occurs backwards (maxPos to minPos).
+    if (maxPos > 499) {
+        maxPos = 499;
+    }
     currPos = maxPos;
     let nextRow = allAlbums[currPos - 1].innerHTML;
 
     for (let i = maxPos; i >= minPos; i--) {
+        console.log(i + ": " + nextRow);
 
         // If it's the last position, then that element will get the draggedElement
         if (currPos == minPos) {
@@ -154,12 +158,9 @@ function dropElementTop(minPos, maxPos, dropElementInnerHTML) {
 }
 
 function sortAlbums(newRow) {
-    let pos = newRow.querySelector('.number').innerHTML - 1;
-    let size = allAlbums.length - 1;
-    if (pos > size) {
-        console.log('too big');
-        newRow.remove();
-    }
+    let newPos = newRow.querySelector('#number').innerHTML - 1;
+
+    dropElementTop(newPos, allAlbums.length, newRow.innerHTML);
 }
 
 // Loop to add the event listeners to each TR
@@ -195,6 +196,12 @@ function appendElement() {
         });
     } catch (e) {
         if (e !== breakException) throw e;
+        return;
+    }
+
+    if (inputs.item(0).value > 500) {
+        alert('This is the top 500 albums list, not the top 1 million.');
+        return;
     }
 
     let newRow = document.createElement('tr');
@@ -239,14 +246,19 @@ function appendElement() {
     button.className = 'btn btn-danger';
     button.textContent = 'delete';
     button.id = 'delete-button';
+
+    if (document.querySelector('.toggle-edit').innerHTML == 'Enable edit') {
+        button.disabled = true;
+    } else {
+        button.disabled = false;
+    }
+
     buttonTD.appendChild(button);
 
     newRow.appendChild(buttonTD);
 
     sortAlbums(newRow);
     addEventListeners(newRow);
-
-    document.getElementById('tableBody').appendChild(newRow);
 
     inputs.forEach(input => {
         input.value = '';
@@ -280,25 +292,42 @@ function deleteElement(el) {
 };
 
 /**
- * TODO ESCAPE ' " & BEFORE ADDING TO JSON !!!!!!!!!!!!!!!!!!!!!!!
- * @returns 
+ * Creates a JSON from the elements with album-row class (got from XML file).
+ * 
+ * @returns JSON of updated albums
  */
 function getJSONFromList() {
-    let json = '{ Collection:';
+    let json = '{ "Collection": {"Album": [';
     for (i = 0; i < allAlbums.length; i++) {
         row = allAlbums[i];
-        json += '{ Album: {' +
-            '{Number:' + encodeURI(row.querySelector('#number').innerHTML) + '},' +
-            '{Year: ' + encodeURI(row.querySelector('.year').innerHTML) + '},' +
-            '{Title: ' + encodeURI(row.querySelector('.title').innerHTML) + '},' +
-            '{Artist: ' + encodeURI(row.querySelector('.artist').innerHTML) + '}' +
-            '}}';
+        json += '{' +
+            '"Number":' + row.querySelector('#number').innerHTML + ',' +
+            '"Year": ' + row.querySelector('.year').innerHTML + ',' +
+            '"Title": "' + row.querySelector('.title').innerHTML
+                .replaceAll(/[\\]/g, '\\\\')
+                .replaceAll(/[\"]/g, '\\\"')
+                .replaceAll(/[\/]/g, '\\/')
+                .replaceAll(/[\b]/g, '\\b')
+                .replaceAll(/[\f]/g, '\\f')
+                .replaceAll(/[\n]/g, '\\n')
+                .replaceAll(/[\r]/g, '\\r')
+                .replaceAll(/[\t]/g, '\\t') + '",' +
+            '"Artist": "' + row.querySelector('.artist').innerHTML
+                .replaceAll(/[\\]/g, '\\\\')
+                .replaceAll(/[\"]/g, '\\\"')
+                .replaceAll(/[\/]/g, '\\/')
+                .replaceAll(/[\b]/g, '\\b')
+                .replaceAll(/[\f]/g, '\\f')
+                .replaceAll(/[\n]/g, '\\n')
+                .replaceAll(/[\r]/g, '\\r')
+                .replaceAll(/[\t]/g, '\\t') + '"' +
+            '}';
         if (i < allAlbums.length - 1) {
             json += ',';
         }
     }
-    json += '}';
-    console.log(json);
+    json += ']}}';
+
     return JSON.parse(json);
 };
 
@@ -313,4 +342,67 @@ function callPostUpdate() {
         data: '{ "body": ' + json + '}',
         async: false
     });
+
+    const notification = window.createNotification({
+
+        closeOnClick: true,
+        positionClass: 'nfc-bottom-left',
+        showDuration: 2500,
+        theme: 'success'
+    });
+
+    notification({
+        title: 'Saved!',
+        message: 'Changes have been successfully saved.',
+    });
 };
+
+function saveChanges() {
+    callPostUpdate();
+};
+
+function fallBackToOriginalXML() {
+    if (!confirm('This will be irreversible and you won\'t be able to get your modified data back. Are you sure you want to continue?')) {
+        return;
+    }
+
+    if (!confirm('All your data will be lost. Proceed?')) {
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/post/fallback',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: '{"body": { "fallback": true } }',
+        async: false
+    });
+
+    draw_table();
+};
+
+function toggleEnable() {
+    let btn = document.querySelector('.toggle-edit');
+    let editable;
+    if (btn.innerHTML == 'Enable edit') {
+        btn.innerHTML = 'Disable edit';
+        editable = true;
+    } else {
+        btn.innerHTML = 'Enable edit';
+        editable = false;
+    }
+
+    allAlbums.forEach((album) => {
+        if (editable) {
+            album.querySelector('#delete-button').removeAttribute('disabled');
+        } else {
+            album.querySelector('#delete-button').setAttribute('disabled', true);
+        }
+        console.log(album.querySelector('.btn-td').querySelector('#delete-button'));
+        album.querySelector('.title').setAttribute('contentEditable', editable);
+        album.querySelector('.year').setAttribute('contentEditable', editable);
+        album.querySelector('.artist').setAttribute('contentEditable', editable);
+        album.setAttribute('draggable', editable);
+    });
+}

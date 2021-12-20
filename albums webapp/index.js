@@ -62,6 +62,23 @@ router.post("/post/update", function (req, res) {
     res.redirect("back");
 });
 
+router.post("/post/fallback", function (req, res) {
+
+    function fallBack() {
+        fs.readFile('./originalalbums.xml', 'utf-8', function (err, data) {
+            if (err) throw err;
+            data = data.toString();
+            fs.writeFile('./albums.xml', data, function (err) {
+                err;
+            });
+        });
+    }
+
+    fallBack();
+
+    res.redirect('fallback');
+});
+
 server.listen(
     process.env.PORT || 3000,
     process.env.IP || "0.0.0.0",

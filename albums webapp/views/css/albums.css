@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    margin: 0 auto 2% auto;
+    margin: 0 auto 1% auto;
     background-color: snow !important;
     width: 100%;
     height: 10%;
@@ -26,7 +26,7 @@ body {
     width: 90%;
     margin: 0 auto 0 auto;
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 5%;
 }
 
@@ -44,7 +44,7 @@ td {
     border-collapse: collapse;
 }
 
-table .album-row {
+.album-row[draggable=true] {
     cursor: grab;
 }
 
@@ -60,4 +60,17 @@ tbody tr:hover {
 .dragged {
     background-color: #f0f0f0;
     border: 1px solid black;
+}
+
+.fallback {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: xx-small;
+    border: 2px solid black;
+}
+
+.top-btn-div {
+    position: absolute;
+    right: 1%;
 }

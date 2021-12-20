@@ -7,6 +7,7 @@
                 <th>Title</th>
                 <th>Year</th>
                 <th>Artist</th>
+                <th></th>
                 <!--
                 <th>Genre</th>
                 <th>Subgenre</th>
@@ -14,17 +15,17 @@
             </thead>
             <tbody id='tableBody'>
                 <xsl:for-each select='//Album'>
-                    <tr class='album-row' id='album-row' draggable='true'>
+                    <tr class='album-row' id='album-row' draggable='false'>
                         <td class='number' id='number'>
                             <xsl:value-of select='Number' />
                         </td>
-                        <td class='title'>
+                        <td class='title' contentEditable='false'>
                             <xsl:value-of select='Title' />
                         </td>
-                        <td class='year'>
+                        <td class='year' contentEditable='false'>
                             <xsl:value-of select='Year' />
                         </td>
-                        <td class='artist'>
+                        <td class='artist' contentEditable='false'>
                             <xsl:value-of select='Artist' />
                         </td>
                         <!--
@@ -41,7 +42,7 @@
                             </xsl:for-each>
                         </td>
                         -->
-                        <td><button class='btn btn-danger' id='delete-button'>delete</button></td>
+                        <td class='btn-td'><button class='btn btn-danger' id='delete-button' disabled='true'>delete</button></td>
                     </tr>
                 </xsl:for-each>
             </tbody>
