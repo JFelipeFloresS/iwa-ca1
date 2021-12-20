@@ -12,17 +12,19 @@ const router = express(), //Instantiating Express
 
 router.use(express.static(path.resolve(__dirname, "views"))); //Serving static content from "public" folder
 
+/**
+ * Uses the bodyParser module in order to escape special characters and handle JSON transformations better.
+ */
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-function XMLtoJSON(filename, cb) {
-    let filepath = path.normalize(path.join(__dirname, filename));
-    fs.readFile(filepath, "utf8", function (err, xmlStr) {
-        if (err) throw (err);
-        xml2js.parseString(xmlStr, {}, cb);
-    });
-}
-
+/**
+ * Overwrites an XML file with the information stored in a JSON.
+ * 
+ * @param {String} filename file to be overwritten.
+ * @param {JSON} obj information to be written.
+ * @param {NoParamCallback} cb call back.
+ */
 function JSONtoXML(filename, obj, cb) {
     let filepath = path.normalize(path.join(__dirname, filename));
     let builder = new xml2js.Builder();
@@ -31,6 +33,9 @@ function JSONtoXML(filename, obj, cb) {
     fs.writeFile(filepath, xml, cb);
 }
 
+/**
+ * Serves HTML content created based on an XML and an XSL file. 
+ */
 router.get("/get/table", function (req, res) {
     res.writeHead(200, {
         "Content-Type": "text/html",
@@ -47,8 +52,16 @@ router.get("/get/table", function (req, res) {
     res.end(result.toString()); //Serve back the user
 });
 
+/**
+ * Updates an XML file with the information of a JSON.
+ */
 router.post("/post/update", function (req, res) {
 
+    /**
+     * Calls the JSONtoXML function.
+     * 
+     * @param {JSON} json updated information
+     */
     function updateJSON(json) {
         JSONtoXML("./albums.xml", json, function (err) {
             if (err) {
@@ -62,8 +75,14 @@ router.post("/post/update", function (req, res) {
     res.redirect("back");
 });
 
+/**
+ * Transforms the updated XML file into the backup original file.
+ */
 router.post("/post/fallback", function (req, res) {
 
+    /**
+     * Reads the information from the original and writes it into the normal file.
+     */
     function fallBack() {
         fs.readFile('./originalalbums.xml', 'utf-8', function (err, data) {
             if (err) throw err;
@@ -79,6 +98,9 @@ router.post("/post/fallback", function (req, res) {
     res.redirect('fallback');
 });
 
+/**
+ * Initiates the server and opens the port to listen.
+ */
 server.listen(
     process.env.PORT || 3000,
     process.env.IP || "0.0.0.0",

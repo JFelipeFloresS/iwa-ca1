@@ -2,19 +2,23 @@
 <html lang="en">
 
     <head>
+        <!-- Meta -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>BEST ALBUMS OF ALL TIME</title>
+
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon"
             href="https://www.rollingstone.com/wp-content/uploads/2018/07/RS_Monogram_3000px-copy-e1530547673203.png" />
+
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="./css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="./css/notifications.css">
         <link href="./css/albums.css" rel="stylesheet" />
 
+        <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="./js/notifications.js"></script>
@@ -23,76 +27,110 @@
     </head>
 
     <body>
+
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
             <div class="container row">
+
+                <!-- Logo -->
                 <a class="navbar-brand col-sm" href="#">
                     <img src="./assets/logo.jpg" alt="Rolling Stone" width="8%" id="logo-img" />
                 </a>
+
+                <!-- Log out -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 col-sm-2">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Log out</a>
                     </li>
                 </ul>
+
             </div>
+
         </nav>
+
         <!-- Page content-->
         <div class="container">
+
             <div class="text-center mt-5">
+
                 <div class="row">
+
+                    <!-- Container header -->
                     <div class='col-sm-5'>
                         <h1>BEST ALBUMS OF ALL TIME</h1>
                         <p class="lead">Update and adjust the top 500 albums of all time!</p>
                     </div>
+
+                    <!-- Top button div (save changes/enable edit) -->
                     <div class="col-sm-3 py-2 top-btn-div row">
-                        <button class="btn btn-success col-sm mx-2 my-2" onclick='saveChanges()'
-                            style="width: 50%;">Save changes</button>
-                        <button class='btn btn-warning toggle-edit col-sm mx-2 my-2' style='width: 50%;'
+
+                        <button class="btn btn-success col-sm mx-2 my-2 w-50" onclick='callPostUpdate()'>Save
+                            changes</button>
+
+                        <button class='btn btn-warning toggle-edit col-sm mx-2 my-2 w-50'
                             onclick='toggleEnable()'>Enable edit</button>
+
                     </div>
+
                 </div>
+
+                <!-- Information div -->
                 <div class="row">
+
+                    <!-- XML/XSL content -->
                     <div class="table-container col-sm">
                         <div id="results"></div>
                     </div>
+
+                    <!-- Append new album form -->
                     <div class="col-sm-1">
-                        <form enctype="application/json" action="/" method="post" id='append-form'>
+
+                        <form enctype="application/json" id='append-form'>
+
+                            <!-- Position -->
                             <label for="position">Position</label>
                             <input type="number" name="position" />
                             <br />
+
+                            <!-- Title -->
                             <label for="title">Title</label>
                             <input type="text" name="title" />
                             <br />
+
+                            <!-- Year -->
                             <label for="year">Year</label>
                             <input type="number" name="year" />
                             <br />
+
+                            <!-- Artist -->
                             <label for="artist">Artist</label>
                             <input type="text" name="artist" />
-                            <!--
-                            <br />
-                            <label for="genre">Genre</label>
-                            <input type="text" name="genre" />
-                            <span id='add-genre'></span>
-                            <br />
-                            <label for="subgenre">Subgenre</label>
-                            <input type="text" name="subgenre" />
-                            <span id='add-subgenre'></span>
-                            -->
                             <br /><br />
+
+                            <!-- Append button -->
                             <button type="button" class="btn btn-primary" action='addAlbum' id="append">
                                 Add album
                             </button>
+
                         </form>
+
                     </div>
+
                 </div>
+
             </div>
+
+            <!-- Fall back button -->
             <button class="btn btn-danger fallback" onclick='fallBackToOriginalXML()'>
                 Fall back to original list
             </button>
+
         </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+
     </body>
 
 </html>
