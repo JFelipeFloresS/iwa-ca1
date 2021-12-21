@@ -4,35 +4,32 @@ grey: #e0e1e6
 */
 
 body {
-    width: 100%;
+    width: 100vw;
     margin: 0 auto 0 auto;
-    height: 100%;
+    height: 100vh;
 }
 
 .navbar {
-    margin: 0 auto 1% auto;
+    margin: 0 auto 0 auto;
     background-color: snow !important;
     width: 100%;
-    height: 10%;
+    height: 10vh !important;
     border-bottom: 1px solid #e0e1e6;
-    position: absolute;
 }
 
 .navbar .logo {
     font-size: larger;
 }
 
-.container {
-    width: 90%;
+.myContainer {
+    width: 98% !important;
+    height: 80vh;
     margin: 0 auto 0 auto;
-    position: absolute;
-    top: 5%;
-    left: 5%;
 }
 
 .table-container {
     overflow-y: auto;
-    max-height: 30em;
+    max-height: 60vh !important;
 }
 
 table,
@@ -42,6 +39,10 @@ td {
     margin: 0;
     padding: 1em;
     border-collapse: collapse;
+}
+
+table {
+    width: 100%;
 }
 
 .album-row[draggable=true] {
@@ -70,7 +71,25 @@ tbody tr:hover {
     border: 2px solid black;
 }
 
-.top-btn-div {
-    position: absolute;
-    right: 1%;
+input, input[type='number'] {
+    width: 98%;
+}
+
+.header-top {
+    height: 10vh;
+}
+
+@media only screen and (max-width: 600px) {
+    .header-top {
+        height: 40vh;
+    }
+
+    .table-container {
+        width: 100vw !important;
+    }
+
+    .select-div, .top-btn-div, .save-changes, .toggle-edit {
+        margin: auto;
+        width: 80vw !important;
+    }
 }

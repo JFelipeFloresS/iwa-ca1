@@ -60,6 +60,12 @@ function handleDragLeave(e) {
 allAlbums = document.querySelectorAll('.album-row');
 allAlbums.forEach(function (album) {
 
+    escapeString(album);
+
+});
+
+function escapeString(album) {
+
     albumTitle = album.querySelector('.title').innerHTML;
     albumTitle = albumTitle.replaceAll('&amp;', '&');
     albumTitle = albumTitle.replaceAll('&quot;', '"');
@@ -70,7 +76,8 @@ allAlbums.forEach(function (album) {
     albumArtist = albumArtist.replaceAll('&quot;', '"');
     album.querySelector('.artist').innerHTML = albumArtist;
 
-});
+
+}
 
 /**
  * Stops the current drag event and places the dragged element where it has been dropped, moving all other items accordingly.
@@ -145,7 +152,6 @@ function dropElementTop(minPos, maxPos, dropElementInnerHTML) {
     let nextRow = allAlbums[currPos - 1].innerHTML;
 
     for (let i = maxPos; i >= minPos; i--) {
-        console.log(i + ": " + nextRow);
 
         // If it's the last position, then that element will get the draggedElement
         if (currPos == minPos) {
@@ -173,8 +179,14 @@ function dropElementTop(minPos, maxPos, dropElementInnerHTML) {
  */
 function sortAlbums(newRow) {
     let newPos = newRow.querySelector('#number').innerHTML - 1;
-
-    dropElementTop(newPos, allAlbums.length, newRow.innerHTML);
+    if (allAlbums.length < 500) {
+        let addRow = document.createElement('tr');
+        addRow.className = 'album-row';
+        addRow.id = 'album-row';
+        document.querySelector('#tableBody').appendChild(addRow);
+        allAlbums = document.querySelectorAll('.album-row');
+    }
+    dropElementTop(newPos, allAlbums.length - 1, newRow.innerHTML);
 }
 
 // Loop to add the event listeners to each TR
@@ -284,6 +296,8 @@ function appendElement() {
     newRow.appendChild(buttonTD);
 
     // Places all rows in their right places and adds the event listeners to the new Element
+    escapeString(newRow);
+    addYearToSelectOptions(newRow);
     sortAlbums(newRow);
     addEventListeners(newRow);
 
@@ -437,10 +451,66 @@ function toggleEnable() {
         } else {
             album.querySelector('#delete-button').setAttribute('disabled', true);
         }
-        console.log(album.querySelector('.btn-td').querySelector('#delete-button'));
         album.querySelector('.title').setAttribute('contentEditable', editable);
         album.querySelector('.year').setAttribute('contentEditable', editable);
         album.querySelector('.artist').setAttribute('contentEditable', editable);
         album.setAttribute('draggable', editable);
     });
 }
+
+years = [];
+allAlbums.forEach((album) => {
+    addYearToSelectOptions(album);
+});
+years.unshift(-1);
+
+function displaySelectYearOptions() {
+    let selectYear = document.querySelector('.select-year');
+    selectYear.innerHTML = '';
+    years.forEach((year) => {
+        let newElement = document.createElement('option');
+        newElement.value = year;
+        newElement.innerHTML = year;
+        if (year == -1) {
+            newElement.innerHTML = 'All time';
+        }
+        selectYear.appendChild(newElement);
+    });
+}
+
+displaySelectYearOptions();
+
+function addYearToSelectOptions(album) {
+    let y = String(album.querySelector('.year').innerHTML);
+    y = y.substring(y.length - 4, y.length - 1);
+    y = parseInt(y + '0');
+    if (!years.includes(y)) {
+        years.push(y);
+        years.sort();
+    }
+    displaySelectYearOptions();
+}
+
+function updateYearDisplayed() {
+    let selected = String(document.querySelector('.select-year').value);
+    let start = selected.substring(0, selected.length - 1);
+
+    let editable = document.querySelector('.toggle-edit');
+
+    allAlbums.forEach((album) => {
+        let year = String(album.querySelector('.year').innerHTML);
+        if (selected == '-1') {
+            album.classList.remove('d-none');
+            editable.removeAttribute('disabled');
+            editable.innerHTML = 'Enable edit';
+        } else if (!year.startsWith(start)) {
+            album.classList.add('d-none');
+            editable.setAttribute('disabled', true);
+            editable.innerHTML = 'Enable edit<br>(Available in all time)';
+        } else {
+            album.classList.remove('d-none');
+            editable.setAttribute('disabled', true);
+            editable.innerHTML = 'Enable edit<br>(Available in all time)';
+        }
+    });
+};
