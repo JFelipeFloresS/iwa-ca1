@@ -64,11 +64,16 @@ tbody tr:hover {
 }
 
 .fallback {
+    padding: 0;
     position: fixed;
     bottom: 0;
     right: 0;
     font-size: xx-small;
-    border: 2px solid black;
+    opacity: 50%;
+}
+
+.fallback:hover {
+    opacity: 100%;
 }
 
 input, input[type='number'] {

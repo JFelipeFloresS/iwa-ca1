@@ -1,7 +1,3 @@
-/**
- * Append handling!!
- */
-
 breakException = {}; // Exception created solely to break from a forEach loop.
 
 // Event listener for the append button
@@ -9,8 +5,6 @@ document.getElementById('append').addEventListener('click', appendElement);
 
 /**
  * Creates an element from the form and places it in the correct place on the table.
- * 
- * @returns null
  */
 function appendElement() {
 
@@ -21,8 +15,29 @@ function appendElement() {
     try {
         // Checks if inputs are not empty
         inputs.forEach(input => {
+            input.value = input.value.trim();
+            console.log(input.value);
             if (input.value == '') {
-                alert('Please write something first!');
+                badNotification({
+                    title: 'Error',
+                    message: 'Pleas fill in all fields!'
+                });
+                throw breakException;
+            }
+
+            if (input.getAttribute('name') == 'position' && (input.value < 1 || input.value > 500)) {
+                badNotification({
+                    title: 'Error',
+                    message: 'Only positions from 1 to 500 allowed!'
+                });
+                throw breakException;
+            }
+
+            if (input.getAttribute('name') == 'year' && (input.value < 1900 || input.value > 2022)) {
+                badNotification({
+                    title: 'Error',
+                    message: 'Only albums from 1900 to 2022 allowed!'
+                });
                 throw breakException;
             }
         });
@@ -31,11 +46,8 @@ function appendElement() {
         return;
     }
 
-    // Only up to 500 albums are allowed to be on the list.
-    if (inputs.item(0).value > 500) {
-        alert('This is the top 500 albums list, not the top 1 million.');
-        return;
-    } else if (inputs.item(0).value > allAlbums.length + 1) {
+    // Places the item in the first position available if greater than the current amount of albums.
+    if (inputs.item(0).value > allAlbums.length + 1) {
         inputs.item(0).value = allAlbums.length + 1;
     }
 
@@ -90,7 +102,7 @@ function appendElement() {
     newRow.appendChild(buttonTD);
 
     // Places all rows in their right places and adds the event listeners to the new Element
-    escapeString(newRow);
+    unescapeString(newRow);
     addYearToSelectOptions(newRow);
     sortAlbums(newRow);
     addEventListeners(newRow);
