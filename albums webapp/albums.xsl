@@ -51,7 +51,12 @@
 
         </table>
 
-        <script src="./js/xsl.js"></script>
+        <!-- JS Files -->
+        <script src="./js/albums.js">a</script>
+        <script src="./js/append.js">a</script>
+        <script src="./js/delete.js">a</script>
+        <script src="./js/drag-drop.js">a</script>
+        <script src="./js/year-selection.js">a</script>
 
     </xsl:template>
 
