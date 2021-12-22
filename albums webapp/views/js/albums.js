@@ -94,6 +94,10 @@ badNotification = window.createNotification({
  * Saves the information of the webpage into the XML file.
  */
 function callPostUpdate() {
+
+    // If a new decade has been added or there are no albums from a decade left, updates the decade options.
+    updateYearOptions();
+
     let json = JSON.stringify(getJSONFromList());
 
     try {

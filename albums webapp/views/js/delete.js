@@ -15,9 +15,6 @@ function deleteElement(el) {
         delPos++;
     }
 
-    // Removes the year option from the HTML select if it's the last element from that decade
-    updateYearOptions();
-
     // Posts update to the server
     callPostUpdate();
 };

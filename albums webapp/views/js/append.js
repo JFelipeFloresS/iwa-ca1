@@ -77,8 +77,6 @@ function appendElement() {
 
     // Replaces the &amp; and &quot; symbols with & and "
     unescapeString(newRow);
-    // If it's the first album from a given decade, add that decade to the list
-    addYearToSelectOptions(newRow);
     // Places all rows in their right places 
     sortAlbums(newRow);
     // Adds the drag and drop and delete button event listeners to the new Element

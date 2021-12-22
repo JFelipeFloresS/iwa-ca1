@@ -1,7 +1,5 @@
 updateYearOptions();
 
-displaySelectYearOptions();
-
 /**
  * Updates the variable years and calls a function to display them to the user.
  */
