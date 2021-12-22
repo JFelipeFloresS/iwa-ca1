@@ -84,13 +84,18 @@ router.post("/post/fallback", function (req, res) {
      * Reads the information from the original and writes it into the normal file.
      */
     function fallBack() {
+
         fs.readFile('./originalalbums.xml', 'utf-8', function (err, data) {
+
             if (err) throw err;
             data = data.toString();
+
             fs.writeFile('./albums.xml', data, function (err) {
                 err;
             });
+
         });
+
     }
 
     fallBack();

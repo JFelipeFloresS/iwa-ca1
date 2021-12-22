@@ -45,7 +45,7 @@ function getJSONFromList() {
             }
         }
         json += ']}}';
-
+        json = json.replaceAll('<br>', ' ');
         return JSON.parse(json);
     } catch (err) {
         badNotification({
