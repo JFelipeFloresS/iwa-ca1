@@ -1,0 +1,3 @@
+tasks:
+  - name: npm
+    command: npm i -g npm start
