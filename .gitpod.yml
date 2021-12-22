@@ -1,0 +1,6 @@
+tasks:
+  - name: install
+    init: npm i
+    
+  - name: run
+    init: node sync-await index.js
