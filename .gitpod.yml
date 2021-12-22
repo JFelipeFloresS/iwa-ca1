@@ -3,4 +3,4 @@ tasks:
     init: npm i
     
   - name: run
-    init: gp sync-await node index.js
+    command: node index.js
