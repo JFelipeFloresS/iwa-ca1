@@ -58,8 +58,7 @@
                     <!-- Top button div (save changes/enable edit) -->
                     <div class="col-sm-3 py-2 top-btn-div row">
 
-                        <button class="btn btn-primary save-changes col-sm mx-2 my-2 w-50"
-                            onclick='callPostUpdate()'>save
+                        <button class="btn btn-primary save-changes col-sm mx-2 my-2 w-50" onclick='saveEdit()'>save
                             changes</button>
 
                         <button class='btn btn-warning toggle-edit col-sm mx-2 my-2 w-50'
@@ -86,7 +85,7 @@
                     <!-- Append new album form -->
                     <div class="col-sm-2">
 
-                        <form enctype="application/json" id='append-form' onsubmit="appendElement()" width='100%'
+                        <form enctype="application/json" id='append-form' onsubmit="appendElement" width='100%'
                             method="dialog">
                             <h4>Add new album:</h4>
                             <!-- Position -->

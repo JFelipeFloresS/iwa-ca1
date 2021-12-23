@@ -57,6 +57,7 @@
         <script src="./js/delete.js">a</script>
         <script src="./js/drag-drop.js">a</script>
         <script src="./js/year-selection.js">a</script>
+        <script src="./js/edit-validator.js">a</script>
 
     </xsl:template>
 

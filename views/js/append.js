@@ -87,6 +87,9 @@ function appendElement() {
         input.value = '';
     });
 
+    inputs.item(0).value = 1;
+    inputs.item(2).value = 2021;
+
     // Updates the list of albums
     allAlbums = document.querySelectorAll('.album-row');
 

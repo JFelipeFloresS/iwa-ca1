@@ -86,7 +86,7 @@ notification = window.createNotification({
 badNotification = window.createNotification({
     closeOnClick: true,
     positionClass: 'nfc-bottom-left',
-    showDuration: 2500,
+    showDuration: 3500,
     theme: 'error'
 });
 
