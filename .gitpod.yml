@@ -1,7 +1,4 @@
 tasks:
-  - name: install
+  - name: node
     init: npm install
-    
-  - name: run
-    init: gp sync-await install
     command: node index.js
