@@ -16,5 +16,5 @@ function deleteElement(el) {
     }
 
     // Posts update to the server
-    callPostUpdate();
+    saveEdit();
 };

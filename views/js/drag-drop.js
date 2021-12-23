@@ -107,7 +107,7 @@ function handleDrop(e) {
         }
 
         // Posts update to the server
-        callPostUpdate();
+        saveEdit();
     }
 };
 

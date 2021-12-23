@@ -32,15 +32,6 @@ body {
     max-height: 60vh !important;
 }
 
-table,
-th,
-td {
-    border: 1px solid #e0e1e6;
-    margin: 0;
-    padding: 1em;
-    border-collapse: collapse;
-}
-
 table {
     width: 100%;
 }

@@ -4,7 +4,7 @@
     <xsl:template match='/'>
         
         <!-- Table start -->
-        <table id='albums-table'>
+        <table id='albums-table' class='table table-striped'>
 
             <!-- Table headers -->
             <thead>

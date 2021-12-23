@@ -94,7 +94,7 @@ function appendElement() {
     allAlbums = document.querySelectorAll('.album-row');
 
     // Calls for an update on the file using the new information
-    callPostUpdate();
+    saveEdit();
 };
 
 /**
