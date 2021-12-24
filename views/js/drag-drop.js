@@ -63,6 +63,10 @@ function handleDrop(e) {
     // Stops the current drag event from continuing.
     e.stopPropagation();
 
+    if (!isTableValid()) {
+        return
+    }
+
     // Handles the drop if the draggedElement is not the same as the dropped element.
     if (draggedElement !== this) {
 

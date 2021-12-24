@@ -12,7 +12,7 @@ function appendElement() {
     let form = document.getElementById('append-form');
     let inputs = form.querySelectorAll('input');
 
-    if (!isValidFormInputs(inputs)) {
+    if (!isValidFormInputs(inputs) || !isTableValid()) {
         return
     }
 
@@ -161,3 +161,11 @@ function sortAlbums(newRow) {
     }
     dropElementTop(newPos, allAlbums.length - 1, newRow.innerHTML);
 }
+
+document.getElementById('append-form').querySelectorAll('input').forEach((input) => {
+    input.addEventListener('keydown', function (e) {
+        if (e.code === "Enter") {
+            document.getElementById('append').click();
+        }
+    });
+});

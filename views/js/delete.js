@@ -5,6 +5,9 @@
  */
 function deleteElement(el) {
 
+    if (!isTableValid()) {
+        return
+    }
     let delPos = el.target.parentNode.parentNode.querySelector('#number').innerHTML;
     el.target.parentNode.parentNode.parentNode.removeChild(el.target.parentNode.parentNode);
 

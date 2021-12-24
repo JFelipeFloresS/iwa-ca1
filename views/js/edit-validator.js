@@ -3,6 +3,14 @@
  */
 function saveEdit() {
 
+
+    // Calls post update if all fields are valid.
+    if (isTableValid()) {
+        callPostUpdate();
+    }
+};
+
+function isTableValid() {
     try {
 
         // Boolean for validation of the fields as a whole.
@@ -16,12 +24,12 @@ function saveEdit() {
         // Throws an error if any field is not valid.
         if (!isValidFields) throw breakException;
 
-        // Calls post update if all fields are valid.
-        callPostUpdate();
+        return true;
     } catch (e) {
         if (e !== breakException) throw e;
+        return false;
     }
-};
+}
 
 /**
  * Validates the contents of a TR.

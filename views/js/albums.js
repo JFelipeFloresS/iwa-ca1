@@ -116,6 +116,8 @@ function callPostUpdate() {
             title: 'Saved!',
             message: 'Changes have been successfully saved.',
         });
+
+        draw_table();
     } catch (err) {
         badNotification({
             title: 'Error',
