@@ -75,6 +75,7 @@ function escapeStringJSON(string) {
 
 /**
  * Creates a notification that can be called whenever it's needed.
+ * Retrieved from https://github.com/JamieLivingstone/styled-notifications
  */
 notification = window.createNotification({
     closeOnClick: true,

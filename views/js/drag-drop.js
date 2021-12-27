@@ -1,3 +1,5 @@
+// Functionalities from https://web.dev/drag-and-drop/
+
 /**
  * This function stores the information of the TR that is being dragged into a variable draggedElement and into the DragEvent, 
  * and allows the DragEvent to move the data.

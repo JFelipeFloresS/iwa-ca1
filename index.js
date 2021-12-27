@@ -1,3 +1,8 @@
+// Using modules retrieved from https://github.com/mikhail-cct/iwa-practical/blob/main/index.js
+
+/**
+ * Initiating modules
+ */
 const express = require("express"), //Allows to respond to HTTP requests, defines routing and renders the required content
     bodyParser = require('body-parser'), // Parses the body of requests
     fs = require("fs"), //Working with the file system (read and write files)

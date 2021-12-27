@@ -1,3 +1,5 @@
+// Usability retrieved from https://github.com/mikhail-cct/iwa-practical/blob/main/views/js/table.js
+
 /**
  * Draws the table with the desired content.
  */
